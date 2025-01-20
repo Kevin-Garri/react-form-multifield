@@ -4,7 +4,16 @@ const list = []
 //titolo articolo e lista articoli
 const Form = () => {
   const [title, setTitle] = useState(list);
-  const [articles, setArticles] = useState({ text: "" });
+  const [articles, setArticles] = useState({
+    "text": "",
+    "id": "",
+    "titolo": "",
+    "contenuto": "",
+    "categoria": "",
+    "immagini": "",
+    "tags": [],
+    "stato": ""
+  });
 
   //funzione submit
   const handlerSubmit = (e) => {
