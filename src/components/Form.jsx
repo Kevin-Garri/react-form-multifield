@@ -24,9 +24,13 @@ const Form = () => {
   //post variabile setpost funzione 
   const [formData, setFormData] = useState({ initialFormData });
   const [posts, setPosts] = useState([]);
+
   //funzione per modifica del modulo
   const handleField = (e) => {
     let value = e.target.value;
+    if (e.target.name === "categoria") {
+      value = categorie[e.target.value];
+    }
     if (e.target.type === "checkbox") {
       value = e.target.checked;
     }
@@ -35,20 +39,36 @@ const Form = () => {
       [e.target.name]: value,
     });
   };
-  //funzione nuovo articolo
-  const handlerNewTask = (e) => {
-    const newArticle = {
-      ...formData,
-      [e.target.name]: e.target.value,
-    };
-    setFormData(newArticle);
+  //
+  const handleTags = (e) => {
+    let { tags, ...others } = formData;
+
+    if (tags.included(e.target.value)) {
+      tags = tags.filter((tag) => tag !== e.target.value);
+    } else {
+      tags = [...tags, e.target.value];
+    }
+
+    setFormData({ tags, ...others });
   };
 
-  //rimozione con filter
-  const handlerRemove = (id) => {
-    const setPosts = posts.filter((item) => item.id !== id);
+  //submit
+  const handlerSubmit = (e) => {
+    e.preventDefault();
+    setPosts([
+      {
+        id: self.crypto.randomUUID(),
+        ...formData,
+      },
+      ...posts,
+    ]);
   };
 
+  //remove
+  const handleRemovePost = (id) => {
+    console.log(id);
+    setPosts(posts.filter((post) => post.id !== id));
+  };
   return
 };
 
