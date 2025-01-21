@@ -20,10 +20,11 @@ const Form = () => {
     tags: [],
     stato: "",
   };
-  //post variabile setpost funzione
+
+  //post variabile setpost funzione 
   const [formData, setFormData] = useState({ initialFormData });
   const [posts, setPosts] = useState([]);
-
+  //funzione per modifica del modulo
   const handleField = (e) => {
     let value = e.target.value;
     if (e.target.type === "checkbox") {
@@ -34,7 +35,7 @@ const Form = () => {
       [e.target.name]: value,
     });
   };
-
+  //funzione nuovo articolo
   const handlerNewTask = (e) => {
     const newArticle = {
       ...formData,
@@ -43,9 +44,9 @@ const Form = () => {
     setFormData(newArticle);
   };
 
+  //rimozione con filter
   const handlerRemove = (id) => {
-    const newList = myList.filter((item) => item.id !== id);
-    setMylist(newList);
+    const setPosts = posts.filter((item) => item.id !== id);
   };
 
   return
